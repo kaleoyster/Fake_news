@@ -3,8 +3,8 @@ The  script will contain mainly Contains functions that extract style-based feat
     1. Hedging 
     2. Elongation 
     3. Named entities 
-    4. Contextuality (LDA)
-    5. Abstract words 
+    4. Topic modeling (LDA)
+    5. Abstract words ~ (Pending) 
 """
 from collections import defaultdict
 from nltk import ne_chunk, word_tokenize

@@ -79,3 +79,29 @@ class Dataset:
         self.dataframe['lemmatized words'] = list_of_words 
         self.dataframe['Topics'] = text_topics
 
+    def bulk_treat_text(self):
+        entities = []
+        elongations = []
+        hedge_words = []
+        processed_words = []
+        text_topics = []
+        for each_text in tqdm(self.dataframe['text'], desc='Processing text'):
+            txt = text.Text(each_text)
+            entities.append(txt.get_entities())
+            elongations.append(txt.get_elongated_words())
+            hedge_words.append(txt.get_hedge_words())
+            txt.create_sentences()
+            list_of_words, words, corpus  = txt.remove_stopwords_and_lemmatize()
+            try:
+                text_topics.append(txt.get_topics())
+            except:
+                #TODO: set up a logging system
+                continue
+
+        self.dataframe['entities'] = entities 
+        self.dataframe['hedge words'] = hedge_words
+        self.dataframe['lemmatized words'] = list_of_words 
+        self.dataframe['Topics'] = text_topics
+
+
+
